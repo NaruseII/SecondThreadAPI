@@ -1,0 +1,4 @@
+name: SecondThreadAPI
+version: 1.0.0
+author: Naruse
+main: fr.naruse.bukkit.SecondThreadAPIPlugin
