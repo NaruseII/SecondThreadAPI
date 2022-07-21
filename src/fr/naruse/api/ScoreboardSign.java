@@ -92,6 +92,14 @@ public class ScoreboardSign<T extends JavaPlugin> {
         scoreByIndex.put(index, score);
     }
 
+    public void addScore(String line){
+        for (int i = 0; i < 15; i++) {
+            if(!scoreByIndex.containsKey(i)){
+                this.setScore(line, i);
+            }
+        }
+    }
+
     public void clearLines(){
         for (String entry : this.scoreboard.getEntries()) {
             this.scoreboard.resetScores(entry);

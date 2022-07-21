@@ -10,8 +10,8 @@ public abstract class Runner {
                 return;
             }
 
-            this.run();
             this.start();
+            this.run();
         };
         CollectionManager.SECOND_THREAD_RUNNABLE_SET.add(runnable);
     }

@@ -1,7 +1,6 @@
 package fr.naruse.api;
 
 import com.google.common.collect.Sets;
-import net.minecraft.server.level.EntityPlayer;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
