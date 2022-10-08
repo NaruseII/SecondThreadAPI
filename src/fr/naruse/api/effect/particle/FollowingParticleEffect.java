@@ -1,28 +1,30 @@
 package fr.naruse.api.effect.particle;
 
 import fr.naruse.api.MathUtils;
-import fr.naruse.api.ParticleUtils;
 import fr.naruse.api.async.CollectionManager;
+import fr.naruse.api.particle.IParticle;
+import fr.naruse.api.particle.Particle;
+import fr.naruse.api.particle.sender.ParticleSender;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 
-public class FollowingParticle {
+public class FollowingParticleEffect {
 
     private Entity target = null;
     private Location locationTarget = null;
-    private final Object particleType;
-    private final ParticleUtils.ParticleSender sender;
+    private final IParticle enumParticle;
+    private final ParticleSender sender;
     private final Location start;
-    private final int speed;
+    private final int speedDivider;
 
     private boolean isDone = false;
     private boolean stopOnTouchTarget = true;
     private boolean isOnTarget = false;
 
-    public FollowingParticle(Object particleType, ParticleUtils.ParticleSender sender, Location start, int speed) {
+    public FollowingParticleEffect(IParticle enumParticle, ParticleSender sender, Location start, int speedDivider) {
         this.start = start;
-        this.speed = speed;
-        this.particleType = particleType;
+        this.speedDivider = speedDivider;
+        this.enumParticle = enumParticle;
         this.sender = sender;
 
         this.start.setX(MathUtils.offSet(start.getX(), 250));
@@ -30,19 +32,19 @@ public class FollowingParticle {
         this.start.setZ(MathUtils.offSet(start.getZ(), 250));
     }
 
-    public FollowingParticle(Entity target, Object particleType, ParticleUtils.ParticleSender sender, Location start, int speed) {
-        this(particleType, sender, start, speed);
+    public FollowingParticleEffect(Entity target, IParticle enumParticle, ParticleSender sender, Location start, int speedDivider) {
+        this(enumParticle, sender, start, speedDivider);
         this.target = target;
     }
 
-    public FollowingParticle(Location target, Object particleType, ParticleUtils.ParticleSender sender, Location start, int speed) {
-        this(particleType, sender, start, speed);
+    public FollowingParticleEffect(Location target, IParticle enumParticle, ParticleSender sender, Location start, int speedDivider) {
+        this(enumParticle, sender, start, speedDivider);
         this.locationTarget = target;
     }
 
     public void onAsyncParticleTouchTarget(Entity target) { }
 
-    public FollowingParticle start(){
+    public FollowingParticleEffect start(){
         Runnable runnable = () -> {
             if(this.isDone){
                 return;
@@ -73,15 +75,15 @@ public class FollowingParticle {
         }
 
         if(!skipAdd){
-            double xToAdd = Math.abs(this.start.getX()-(this.target == null ? this.locationTarget.getX() : this.target.getLocation().getX()))/this.speed;
-            double yToAdd = Math.abs(this.start.getY()-(this.target == null ? this.locationTarget.getY() : this.target.getLocation().getY()))/this.speed;
-            double zToAdd = Math.abs(this.start.getZ()-(this.target == null ? this.locationTarget.getZ() : this.target.getLocation().getZ()))/this.speed;
+            double xToAdd = Math.abs(this.start.getX()-(this.target == null ? this.locationTarget.getX() : this.target.getLocation().getX()))/this.speedDivider;
+            double yToAdd = Math.abs(this.start.getY()-(this.target == null ? this.locationTarget.getY() : this.target.getLocation().getY()))/this.speedDivider;
+            double zToAdd = Math.abs(this.start.getZ()-(this.target == null ? this.locationTarget.getZ() : this.target.getLocation().getZ()))/this.speedDivider;
             this.start.add(this.needToAddPositive(MathUtils.Axis.X) ? xToAdd : -xToAdd,
                     this.needToAddPositive(MathUtils.Axis.Y) ? yToAdd : -yToAdd,
                     this.needToAddPositive(MathUtils.Axis.Z) ? zToAdd : -zToAdd);
         }
 
-        sender.send(ParticleUtils.buildParticle(this.start, particleType, 0, 0, 0, 1));
+        sender.send(Particle.buildParticle(this.start, this.enumParticle, 0, 0, 0, 1));
     }
 
     private boolean needToAddPositive(MathUtils.Axis axis){
@@ -112,7 +114,7 @@ public class FollowingParticle {
         this.isOnTarget = false;
     }
 
-    public FollowingParticle setStopOnTouchTarget(boolean stopOnTouchTarget) {
+    public FollowingParticleEffect setStopOnTouchTarget(boolean stopOnTouchTarget) {
         this.stopOnTouchTarget = stopOnTouchTarget;
         return this;
     }

@@ -1,7 +1,8 @@
-package fr.naruse.api.main;
+package fr.naruse.api;
 
 import fr.naruse.api.async.CollectionManager;
 import fr.naruse.api.async.ThreadGlobal;
+import fr.naruse.api.particle.version.VersionManager;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.entity.Entity;
@@ -26,6 +27,8 @@ public class APIInit implements Listener {
                 CollectionManager.ASYNC_ENTITY_LIST.add(entity);
             }
         }
+
+        VersionManager.init(plugin);
     }
 
     public static void shutdown(){

@@ -1,13 +1,13 @@
 package fr.naruse.api.effect.particle;
 
 import fr.naruse.api.MathUtils;
-import fr.naruse.api.ParticleUtils;
 import fr.naruse.api.async.CollectionManager;
-import net.minecraft.core.particles.ParticleParam;
+import fr.naruse.api.particle.IParticle;
+import fr.naruse.api.particle.Particle;
 import org.bukkit.Location;
 import org.bukkit.Material;
 
-public class ParticleGrowingCircle {
+public class ParticleGrowingCircleEffect {
 
     private final Location center;
     private final double radiusAdd;
@@ -18,23 +18,23 @@ public class ParticleGrowingCircle {
     private final float offsetX;
     private final float offsetY;
     private final float offsetZ;
-    private final ParticleParam[] particleParam;
+    private final IParticle[] enumParticles;
 
     private double d = 0;
     private int amount = 4;
 
-    public ParticleGrowingCircle(Location center, double radiusAdd, double radiusEnd, int amountAdd, int particleCount, boolean closeToBlock, ParticleParam... particleParam) {
-        this(center, radiusAdd, radiusEnd, amountAdd, particleCount, closeToBlock, 0, 0, 0, particleParam);
+    public ParticleGrowingCircleEffect(Location center, double radiusAdd, double radiusEnd, int amountAdd, int particleCount, boolean closeToBlock, IParticle... enumParticles) {
+        this(center, radiusAdd, radiusEnd, amountAdd, particleCount, closeToBlock, 0, 0, 0, enumParticles);
     }
 
-    public ParticleGrowingCircle(Location center, double radiusAdd, double radiusEnd, int amountAdd, int particleCount, boolean closeToBlock, float offsetX, float offsetY, float offsetZ, ParticleParam... particleParam) {
+    public ParticleGrowingCircleEffect(Location center, double radiusAdd, double radiusEnd, int amountAdd, int particleCount, boolean closeToBlock, float offsetX, float offsetY, float offsetZ, IParticle... enumParticles) {
         this.center = center;
         this.radiusAdd = radiusAdd;
         this.radiusEnd = radiusEnd;
         this.amountAdd = amountAdd;
         this.particleCount = particleCount;
         this.closeToBlock = closeToBlock;
-        this.particleParam = particleParam;
+        this.enumParticles = enumParticles;
         this.offsetX = offsetX;
         this.offsetY = offsetY;
         this.offsetZ = offsetZ;
@@ -60,8 +60,8 @@ public class ParticleGrowingCircle {
                     }
                 }
 
-                for (ParticleParam param : particleParam) {
-                    ParticleUtils.buildParticle(location, param, offsetY, offsetX, offsetZ, particleCount, 0).toNearbyFifty();
+                for (IParticle enumParticle : this.enumParticles) {
+                    Particle.buildParticle(location, enumParticle, offsetY, offsetX, offsetZ, particleCount, 0).toNearbyFifty();
                 }
             }
             d += radiusAdd;

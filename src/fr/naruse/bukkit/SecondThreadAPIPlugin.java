@@ -1,6 +1,6 @@
 package fr.naruse.bukkit;
 
-import fr.naruse.api.main.APIInit;
+import fr.naruse.api.APIInit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class SecondThreadAPIPlugin extends JavaPlugin {
@@ -18,4 +18,5 @@ public class SecondThreadAPIPlugin extends JavaPlugin {
 
         APIInit.shutdown();
     }
+
 }

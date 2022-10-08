@@ -2,11 +2,11 @@ package fr.naruse.api.effect.particle;
 
 import com.google.common.collect.Sets;
 import fr.naruse.api.MathUtils;
-import fr.naruse.api.ParticleUtils;
 import fr.naruse.api.async.CollectionManager;
+import fr.naruse.api.particle.Particle;
+import fr.naruse.api.particle.sender.ParticleSender;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
-import org.bukkit.entity.Player;
 
 import java.util.List;
 import java.util.Set;
@@ -14,21 +14,21 @@ import java.util.Set;
 public class ParticleCircleAroundEntityEffect {
 
     private final Entity entity;
-    private final Set<Player> players;
+    private final ParticleSender particleSender;
     private final int circleAmount;
     private final int circleRadius;
-    private final int speed;
+    private final int speedDivider;
 
-    private final Set<FollowingParticlePath> loopingParticles = Sets.newHashSet();
+    private final Set<FollowingParticlePathEffect> loopingParticles = Sets.newHashSet();
     private boolean isCancelled = false;
     private Location location;
 
-    public ParticleCircleAroundEntityEffect(Entity entity, Set<Player> players, int circleAmount, int circleRadius, int speed) {
+    public ParticleCircleAroundEntityEffect(Entity entity, ParticleSender particleSender, int circleAmount, int circleRadius, int speedDivider) {
         this.entity = entity;
-        this.players = players;
+        this.particleSender = particleSender;
         this.circleAmount = circleAmount;
         this.circleRadius = circleRadius;
-        this.speed = speed;
+        this.speedDivider = speedDivider;
 
         this.init();
         this.play();
@@ -37,22 +37,21 @@ public class ParticleCircleAroundEntityEffect {
     private void init() {
         this.location = entity.getLocation();
         List<Location> circle = MathUtils.getCircle(entity.getLocation().add(0, 3, 0), circleRadius,  circleAmount);
-        ParticleUtils.ParticleSender sender = ParticleUtils.ParticleSender.buildToSome(players);
 
         for (int i = 0; i < circle.size(); i++) {
 
             Location loc = circle.get(i);
 
-            this.loopingParticles.add(new FollowingParticlePath(circle, new FollowingParticle[] {
-                    new FollowingParticle(loc, ParticleUtils.fromName("WITCH"), sender, entity.getLocation(), speed).setStopOnTouchTarget(false).start()
-                    , new FollowingParticle(loc, ParticleUtils.fromName("CLOUD"), sender, entity.getLocation(), speed).setStopOnTouchTarget(false).start()
+            this.loopingParticles.add(new FollowingParticlePathEffect(circle, new FollowingParticleEffect[] {
+                    new FollowingParticleEffect(loc, Particle.getEnumParticle().WITCH(), particleSender, entity.getLocation(), speedDivider).setStopOnTouchTarget(false).start()
+                    , new FollowingParticleEffect(loc, Particle.getEnumParticle().CLOUD(), particleSender, entity.getLocation(), speedDivider).setStopOnTouchTarget(false).start()
             }, i).start());
         }
     }
 
     public void kill() {
         isCancelled = true;
-        for (FollowingParticlePath loopingParticle : loopingParticles) {
+        for (FollowingParticlePathEffect loopingParticle : loopingParticles) {
             loopingParticle.setCancelled(true);
         }
     }
@@ -65,7 +64,7 @@ public class ParticleCircleAroundEntityEffect {
             }
 
             if(location.distanceSquared(entity.getLocation()) != 0){
-                for (FollowingParticlePath loopingParticle : loopingParticles) {
+                for (FollowingParticlePathEffect loopingParticle : loopingParticles) {
                     loopingParticle.setCancelled(true);
                 }
                 loopingParticles.clear();

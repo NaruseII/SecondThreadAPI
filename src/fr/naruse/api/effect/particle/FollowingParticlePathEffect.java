@@ -5,38 +5,38 @@ import org.bukkit.Location;
 
 import java.util.List;
 
-public class FollowingParticlePath {
+public class FollowingParticlePathEffect {
 
     private List<Location> locations;
-    private final FollowingParticle[] particles;
+    private final FollowingParticleEffect[] particles;
     private int currentIndex;
     private boolean reverse;
 
     private boolean isCancelled = false;
 
-    public FollowingParticlePath(List<Location> locations, FollowingParticle[] particles, int startIndex, boolean reverse) {
+    public FollowingParticlePathEffect(List<Location> locations, FollowingParticleEffect[] particles, int startIndex, boolean reverse) {
         this(locations, particles, startIndex);
         this.reverse = reverse;
     }
 
-    public FollowingParticlePath(List<Location> locations, FollowingParticle[] particles, int startIndex) {
+    public FollowingParticlePathEffect(List<Location> locations, FollowingParticleEffect[] particles, int startIndex) {
         this.locations = locations;
         this.currentIndex = startIndex;
         this.particles = particles;
     }
 
-    public FollowingParticlePath start(){
+    public FollowingParticlePathEffect start(){
         Runnable runnable = () -> {
 
             if(isCancelled){
-                for (FollowingParticle particle : this.particles) {
+                for (FollowingParticleEffect particle : this.particles) {
                     particle.setDone(true);
                 }
                 return;
             }
 
             boolean next = false;
-            for (FollowingParticle particle : particles) {
+            for (FollowingParticleEffect particle : particles) {
                 if(particle.isOnTarget()){
                     next = true;
                 }else{
@@ -62,7 +62,7 @@ public class FollowingParticlePath {
                 }
             }
 
-            for (FollowingParticle particle : this.particles) {
+            for (FollowingParticleEffect particle : this.particles) {
                 particle.setLocationTarget(locations.get(this.currentIndex));
             }
         };
