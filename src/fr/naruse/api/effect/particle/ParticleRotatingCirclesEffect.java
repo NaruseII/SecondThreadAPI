@@ -48,5 +48,9 @@ public abstract class ParticleRotatingCirclesEffect extends ParticleEffect {
     public void start() {
 
     }
+
+    public List<ParticleRotatingCircleEffect> getEffectList() {
+        return this.effectList;
+    }
 }
 

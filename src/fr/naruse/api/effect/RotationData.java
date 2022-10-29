@@ -90,4 +90,8 @@ public class RotationData {
 
         return this.currentDegree;
     }
+
+    public int getCurrentDegree() {
+        return this.currentDegree;
+    }
 }

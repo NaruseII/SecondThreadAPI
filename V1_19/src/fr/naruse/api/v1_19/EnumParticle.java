@@ -7,7 +7,7 @@ import net.minecraft.core.particles.Particles;
 public class EnumParticle implements IEnumParticle {
 
     @Override
-    public IParticle SOUL_FIRE_FLAME() {return () -> Particles.B;}
+    public IParticle SOUL_FIRE_FLAME() {return () -> Particles.G;}
 
     @Override
     public IParticle FIRE() {
@@ -61,7 +61,7 @@ public class EnumParticle implements IEnumParticle {
 
     @Override
     public IParticle SOUL() {
-        return () -> Particles.B;
+        return () -> Particles.H;
     }
 
     @Override

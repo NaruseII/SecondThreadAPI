@@ -6,29 +6,27 @@ import fr.naruse.api.effect.RotationData;
 import fr.naruse.api.particle.IParticle;
 import fr.naruse.api.particle.Particle;
 import fr.naruse.api.shape.ShapeBuilder;
+import fr.naruse.api.shape.ShapeList;
 import org.bukkit.Location;
 
 import java.util.List;
 
-public class ParticleRotatingCircleEffect extends ParticleEffect {
+public class ParticleShapeEffect extends ParticleEffect {
 
     private final Location center;
-    private final int particleAmount;
+    private final int particleAmountPerLine;
     private double radius;
     private final RotationData rotationData;
-    private final MathUtils.Axis circleAxis;
     private IParticle particle;
 
     private Location location;
-    private List<Location> cubeShapeLocationList = Lists.newArrayList();
+    private List<Location> shapeLocationList = Lists.newArrayList();
     private ShapeBuilder shapeBuilder;
 
-    public ParticleRotatingCircleEffect(Location center, double radius, int particleAmount, MathUtils.Axis circleAxis,
-                                        RotationData rotationData, IParticle particle) {
+    public ParticleShapeEffect(Location center, double radius, int particleAmountPerLine, RotationData rotationData, IParticle particle) {
         this.center = center;
         this.rotationData = rotationData;
-        this.particleAmount = particleAmount;
-        this.circleAxis = circleAxis;
+        this.particleAmountPerLine = particleAmountPerLine;
         this.radius = radius;
         this.particle = particle;
 
@@ -42,13 +40,6 @@ public class ParticleRotatingCircleEffect extends ParticleEffect {
         this.calculateShape();
     }
 
-    public void calculateShape() {
-        this.shapeBuilder = ShapeBuilder.init(this.location)
-                .circle(this.radius, this.particleAmount, this.circleAxis);
-    }
-
-    private int index = 0;
-
     @Override
     protected void run() {
         ShapeBuilder shapeBuilder1 = this.shapeBuilder.clone();
@@ -61,17 +52,11 @@ public class ParticleRotatingCircleEffect extends ParticleEffect {
 
         shapeBuilder1.center();
 
-        this.cubeShapeLocationList = shapeBuilder1.build(1);
+        this.shapeLocationList = shapeBuilder1.build(this.particleAmountPerLine);
 
-        if(this.index >= this.cubeShapeLocationList.size()-1){
-            this.index = 0;
+        for (Location location1 : this.shapeLocationList) {
+            Particle.buildParticle(location1, this.particle, 0, 0, 0, 1).toNearbyFifty();
         }
-
-        Location location1 = this.cubeShapeLocationList.get(this.index);
-        Particle.buildParticle(location1, this.particle, 0, 0, 0, 1).toNearbyFifty();
-
-        this.index ++;
-
     }
 
     @Override
@@ -79,6 +64,9 @@ public class ParticleRotatingCircleEffect extends ParticleEffect {
         this.killRunner();
     }
 
+    public void calculateShape(){
+        this.shapeBuilder = ShapeList.createCubeShape(this.location, this.radius);
+    }
 
     public void setRadius(double radius) {
         this.radius = radius;
@@ -92,8 +80,27 @@ public class ParticleRotatingCircleEffect extends ParticleEffect {
         return this.rotationData;
     }
 
-    public void setLocation(Location location) {
-        this.location = location;
+    public Location getLocation() {
+        return this.location.clone();
+    }
+
+    public ShapeBuilder getShapeBuilder() {
+        return this.shapeBuilder;
+    }
+
+    public void setShapeBuilder(ShapeBuilder shapeBuilder) {
+        this.shapeBuilder = shapeBuilder;
+    }
+
+    public List<Location> getShapeLocationList() {
+        return this.shapeLocationList;
+    }
+
+    public IParticle getParticle() {
+        return this.particle;
+    }
+
+    public void setParticle(IParticle particle) {
+        this.particle = particle;
     }
 }
-

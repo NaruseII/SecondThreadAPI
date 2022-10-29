@@ -61,7 +61,7 @@ public class EnumParticle implements IEnumParticle {
 
     @Override
     public IParticle SOUL() {
-        return () -> Particles.SOUL_FIRE_FLAME;
+        return () -> Particles.SOUL;
     }
 
     @Override
