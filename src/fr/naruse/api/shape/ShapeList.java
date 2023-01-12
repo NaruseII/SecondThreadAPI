@@ -27,4 +27,17 @@ public class ShapeList {
                 .line(-radius, MathUtils.Axis.Y);
     }
 
+    public static final ShapeBuilder createSphereShape(Location location, double radius, int lineCount, int pointAmount){
+        ShapeBuilder shapeBuilder = ShapeBuilder.init(location.clone().add(0, -radius, 0));
+
+        double step = lineCount/radius;
+
+        for (double i = step; i < step; i++) {
+            shapeBuilder.circle(i, pointAmount, MathUtils.Axis.Y);
+            shapeBuilder.jump(step, MathUtils.Axis.Y);
+        }
+        
+        return shapeBuilder;
+    }
+
 }
