@@ -255,7 +255,7 @@ public class MathUtils {
         return getVerticalCircle(center, radius, amount, 0);
     }
 
-    public static List<Location> getVerticalCircle(Location center, double radius, int amount, int rotateDegrees) {
+    public static List<Location> getVerticalCircle(Location center, double radius, int amount, double rotateDegrees) {
         double increment = (2 * Math.PI) / amount;
         ArrayList<Location> locations = new ArrayList<>();
         for(int i = 0;i < amount; i++) {
@@ -268,7 +268,7 @@ public class MathUtils {
         return locations;
     }
 
-    public static List<Location> get2DRectangleLocation(Location center, int depth, int width, int degree, boolean centerShape, Axis... axis){
+    public static List<Location> get2DRectangleLocation(Location center, int depth, int width, double degree, boolean centerShape, Axis... axis){
         ShapeBuilder shapeBuilder = ShapeBuilder.init(center.clone());
 
         boolean flag = true;
@@ -332,7 +332,7 @@ public class MathUtils {
         return list;
     }
 
-    public static List<Location> get3DRectangleLocation(Location center, int depth, int width, int height, int degree, boolean centerShape, Axis... axis){
+    public static List<Location> get3DRectangleLocation(Location center, int depth, int width, int height, double degree, boolean centerShape, Axis... axis){
         ShapeBuilder shapeBuilder = ShapeBuilder.init(center.clone());
 
         boolean flag = true;

@@ -12,13 +12,18 @@ public class RotationData {
     private boolean axisY;
     private boolean axisZ;
     private boolean isNegativeRotation = false;
-    private int degreeIncrement = 1;
+    private double degreeIncrement = 1;
 
-    private int currentDegree = 0;
+    private double currentDegree = 0;
     private int tick;
 
     public RotationData setTickInterval(int tickInterval) {
         this.tickInterval = tickInterval;
+        return this;
+    }
+
+    public RotationData setDegreeIncrement(double degreeIncrement) {
+        this.degreeIncrement = degreeIncrement;
         return this;
     }
 
@@ -66,18 +71,18 @@ public class RotationData {
         return list.toArray(new MathUtils.Axis[0]);
     }
 
-    public int getCalculatedDegree(){
+    public double getCalculatedDegree(){
         if(this.tick == this.tickInterval){
             this.tick = 0;
 
             if(this.isNegativeRotation){
-                if(this.currentDegree == -1){
+                if(this.currentDegree <= -1){
                     this.currentDegree = 360;
                 }else{
                     this.currentDegree -= this.degreeIncrement;
                 }
             }else{
-                if(this.currentDegree == 361){
+                if(this.currentDegree >= 361){
                     this.currentDegree = 0;
                 }else{
                     this.currentDegree += this.degreeIncrement;
@@ -91,7 +96,11 @@ public class RotationData {
         return this.currentDegree;
     }
 
-    public int getCurrentDegree() {
+    public double getCurrentDegree() {
         return this.currentDegree;
+    }
+
+    public double getDegreeIncrement() {
+        return this.degreeIncrement;
     }
 }

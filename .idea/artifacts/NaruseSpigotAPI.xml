@@ -1,0 +1,16 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="NaruseSpigotAPI">
+    <output-path>$PROJECT_DIR$/out/artifacts/NaruseSpigotAPI</output-path>
+    <root id="archive" name="SecondThreadAPI.jar">
+      <element id="module-output" name="SecondThreadParticleAPI" />
+      <element id="module-output" name="V1_12" />
+      <element id="module-output" name="V1_19" />
+      <element id="module-output" name="V1_18" />
+      <element id="module-output" name="V1_17" />
+      <element id="module-output" name="V1_16" />
+      <element id="module-output" name="V1_15" />
+      <element id="module-output" name="V1_14" />
+      <element id="module-output" name="V1_13" />
+    </root>
+  </artifact>
+</component>

@@ -44,7 +44,7 @@ public class ParticleShapeEffect extends ParticleEffect {
     protected void run() {
         ShapeBuilder shapeBuilder1 = this.shapeBuilder.clone();
 
-        int degree = this.rotationData.getCalculatedDegree();
+        double degree = this.rotationData.getCalculatedDegree();
 
         for (MathUtils.Axis axis : this.rotationData.getRotationAxis()) {
             shapeBuilder1.rotateAll(degree, axis);
@@ -102,5 +102,9 @@ public class ParticleShapeEffect extends ParticleEffect {
 
     public void setParticle(IParticle particle) {
         this.particle = particle;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
     }
 }

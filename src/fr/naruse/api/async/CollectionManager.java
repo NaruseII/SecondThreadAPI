@@ -25,6 +25,7 @@ public class CollectionManager {
         protected boolean needToFlushValue(Entity entity) {
             return entity.isDead();
         }
+
     };
 
     static {
@@ -51,6 +52,20 @@ public class CollectionManager {
         public void add(T key){
             ThreadGlobal.getExecutorService().submit(() -> {
                 set.add(key);
+            });
+        }
+
+        public void addLater(T key, long millis){
+            this.addLaterr(key, System.currentTimeMillis()+millis);
+        }
+
+        private void addLaterr(T key, long millis){
+            SECOND_THREAD_RUNNABLE_SET.add(() -> {
+                if(millis <= System.currentTimeMillis()){
+                    this.add(key);
+                }else{
+                    this.addLaterr(key, millis);
+                }
             });
         }
 

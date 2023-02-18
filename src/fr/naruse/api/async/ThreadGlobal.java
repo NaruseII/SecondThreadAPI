@@ -102,6 +102,20 @@ public class ThreadGlobal {
         isStopping = true;
         EXECUTOR_SERVICE.shutdown();
         EXECUTOR.shutdown();
+
+        try {
+            pl.getLogger().info("Terminating threads...");
+            EXECUTOR_SERVICE.awaitTermination(10, TimeUnit.SECONDS);
+            EXECUTOR.awaitTermination(10, TimeUnit.SECONDS);
+            if(!EXECUTOR_SERVICE.isTerminated()){
+                pl.getLogger().info("Forcing shutdown...");
+                EXECUTOR_SERVICE.shutdownNow();
+                EXECUTOR.shutdownNow();
+            }
+            pl.getLogger().info("Threads stopped.");
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public static void runSync(Runnable runnable){

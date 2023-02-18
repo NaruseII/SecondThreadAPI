@@ -53,7 +53,7 @@ public class ParticleRotatingCircleEffect extends ParticleEffect {
     protected void run() {
         ShapeBuilder shapeBuilder1 = this.shapeBuilder.clone();
 
-        int degree = this.rotationData.getCalculatedDegree();
+        double degree = this.rotationData.getCalculatedDegree();
 
         for (MathUtils.Axis axis : this.rotationData.getRotationAxis()) {
             shapeBuilder1.rotateAll(degree, axis);

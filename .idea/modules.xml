@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/SecondThreadParticleAPI.iml" filepath="$PROJECT_DIR$/SecondThreadParticleAPI.iml" />
+      <module fileurl="file://$PROJECT_DIR$/V1_12/V1_12.iml" filepath="$PROJECT_DIR$/V1_12/V1_12.iml" />
+      <module fileurl="file://$PROJECT_DIR$/V1_13/V1_13.iml" filepath="$PROJECT_DIR$/V1_13/V1_13.iml" />
+      <module fileurl="file://$PROJECT_DIR$/V1_14/V1_14.iml" filepath="$PROJECT_DIR$/V1_14/V1_14.iml" />
+      <module fileurl="file://$PROJECT_DIR$/V1_15/V1_15.iml" filepath="$PROJECT_DIR$/V1_15/V1_15.iml" />
+      <module fileurl="file://$PROJECT_DIR$/V1_16/V1_16.iml" filepath="$PROJECT_DIR$/V1_16/V1_16.iml" />
+      <module fileurl="file://$PROJECT_DIR$/V1_17/V1_17.iml" filepath="$PROJECT_DIR$/V1_17/V1_17.iml" />
+      <module fileurl="file://$PROJECT_DIR$/V1_18/V1_18.iml" filepath="$PROJECT_DIR$/V1_18/V1_18.iml" />
+      <module fileurl="file://$PROJECT_DIR$/V1_19/V1_19.iml" filepath="$PROJECT_DIR$/V1_19/V1_19.iml" />
+    </modules>
+  </component>
+</project>
