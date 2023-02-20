@@ -12,14 +12,10 @@ public class SecondThreadAPIPlugin extends JavaPlugin {
         super.onEnable();
 
         APIInit.init(this);
+        new Metrics(this, 17784);
 
-        this.getServer().getScheduler().runTaskTimerAsynchronously(this, () -> {
-            CollectionManager.SECOND_THREAD_RUNNABLE_SET.add(() -> {
-                PluginUpdater.checkSpleef(this);
-                PluginUpdater.checkDAC(this);
-            });
-        }, 20*10, 20*10);//20*60*60, 20*60*20);
-
+        this.getServer().getScheduler().runTaskTimerAsynchronously(this, () -> this.checkPlugins(), 20*60*60, 20*60*20);
+        CollectionManager.SECOND_THREAD_RUNNABLE_SET.addLater(() -> this.checkPlugins(), 1000*10);
     }
 
     @Override
@@ -27,5 +23,13 @@ public class SecondThreadAPIPlugin extends JavaPlugin {
         super.onDisable();
 
         APIInit.shutdown();
+    }
+
+
+    private void checkPlugins(){
+        CollectionManager.SECOND_THREAD_RUNNABLE_SET.add(() -> {
+            PluginUpdater.checkSpleef(this);
+            PluginUpdater.checkDAC(this);
+        });
     }
 }
