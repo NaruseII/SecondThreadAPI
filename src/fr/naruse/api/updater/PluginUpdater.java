@@ -15,16 +15,20 @@ import java.util.Scanner;
 public class PluginUpdater {
 
     public static void checkSpleef(JavaPlugin javaPlugin){
-        checkPlugin(javaPlugin, "Spleef");
+        checkPlugin(javaPlugin, "Spleef", "Spleef");
     }
 
-    private static void checkPlugin(JavaPlugin javaPlugin, String pluginName){
+    public static void checkDAC(JavaPlugin javaPlugin){
+        checkPlugin(javaPlugin, "DeACoudre", "DeACoudre");
+    }
+
+    private static void checkPlugin(JavaPlugin javaPlugin, String pluginName, String gitHubName){
         Plugin plugin = Bukkit.getPluginManager().getPlugin(pluginName);
         if(plugin == null) {
             return;
         }
 
-        String version = getVersion("https://raw.githubusercontent.com/NaruseII/"+pluginName+"/master/src/plugin.yml");
+        String version = getVersion("https://raw.githubusercontent.com/NaruseII/"+gitHubName+"/master/src/plugin.yml");
         if(version.equals("error")){
             javaPlugin.getLogger().severe("Could not check online dependecies!");
             return;
@@ -38,7 +42,7 @@ public class PluginUpdater {
         if(file.exists()){
             file.delete();
         }
-        if(!downloadFile("https://github.com/NaruseII/"+pluginName+"/blob/master/out/artifacts/"+pluginName+"/"+pluginName+".jar?raw=true", file)){
+        if(!downloadFile("https://github.com/NaruseII/"+gitHubName+"/blob/master/out/artifacts/"+gitHubName+"/"+pluginName+".jar?raw=true", file)){
             javaPlugin.getLogger().severe("Unable to download "+pluginName);
             return;
         }
