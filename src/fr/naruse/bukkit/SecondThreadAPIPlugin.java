@@ -14,7 +14,6 @@ public class SecondThreadAPIPlugin extends JavaPlugin {
         APIInit.init(this);
 
         this.getServer().getScheduler().runTaskTimerAsynchronously(this, () -> {
-            System.out.println("checking");
             CollectionManager.SECOND_THREAD_RUNNABLE_SET.add(() -> {
                 PluginUpdater.checkSpleef(this);
                 PluginUpdater.checkDAC(this);
