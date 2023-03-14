@@ -8,6 +8,7 @@ import fr.naruse.api.v1_16.Version1_16;
 import fr.naruse.api.v1_17.*;
 import fr.naruse.api.v1_18.Version1_18;
 import fr.naruse.api.v1_19.Version1_19;
+import fr.naruse.api.v1_19_3.Version1_19_3;
 
 public enum MinecraftVersion {
 
@@ -19,6 +20,7 @@ public enum MinecraftVersion {
     V1_17("1.17", Version1_17.class),
     V1_18("1.18", Version1_18.class),
     V1_19("1.19", Version1_19.class),
+    V1_19_3("1.19.3", Version1_19_3.class),
     ;
 
 
@@ -49,7 +51,6 @@ public enum MinecraftVersion {
         for (MinecraftVersion value : values()) {
             if(version.contains(value.getVersionTag())){
                 currentVersion = value;
-                return;
             }
         }
     }
