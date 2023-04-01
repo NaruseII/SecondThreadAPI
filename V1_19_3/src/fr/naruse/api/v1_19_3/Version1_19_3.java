@@ -8,8 +8,13 @@ import net.minecraft.core.particles.ParticleType;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.PacketPlayOutWorldParticles;
 import net.minecraft.server.level.EntityPlayer;
+import net.minecraft.world.entity.EntityInsentient;
+import net.minecraft.world.entity.ai.navigation.NavigationAbstract;
+import net.minecraft.world.level.pathfinder.PathEntity;
 import org.bukkit.Location;
+import org.bukkit.craftbukkit.v1_19_R2.entity.CraftEntity;
 import org.bukkit.craftbukkit.v1_19_R2.entity.CraftPlayer;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 
 public class Version1_19_3 implements IVersion {
@@ -42,5 +47,19 @@ public class Version1_19_3 implements IVersion {
         return new Particle(packet, location);
     }
 
+    @Override
+    public void moveEntityToDestination(Entity entity, Location destination, double speed) {
+        try{
+            net.minecraft.world.entity.Entity e = ((CraftEntity) entity).getHandle();
+            EntityInsentient entityInsentient = (EntityInsentient) e;
+            NavigationAbstract navigationAbstract = (NavigationAbstract) Class.forName("net.minecraft.world.entity.EntityInsentient").getDeclaredMethod("E").invoke(entityInsentient);
+            PathEntity pathEntity = navigationAbstract.a(destination.getX(), destination.getY(), destination.getZ(), 1);
+            if(pathEntity != null){
+                navigationAbstract.a(pathEntity, speed);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 
 }

@@ -1,10 +1,11 @@
-package fr.naruse.api.v1_17;
+package fr.naruse.api.v1_19_4;
 
 import fr.naruse.api.particle.IParticle;
 import fr.naruse.api.particle.Particle;
 import fr.naruse.api.particle.version.IVersion;
 import fr.naruse.api.particle.version.particle.IEnumParticle;
 import net.minecraft.core.particles.ParticleType;
+import net.minecraft.core.particles.Particles;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.PacketPlayOutWorldParticles;
 import net.minecraft.server.level.EntityPlayer;
@@ -12,12 +13,12 @@ import net.minecraft.world.entity.EntityInsentient;
 import net.minecraft.world.entity.ai.navigation.NavigationAbstract;
 import net.minecraft.world.level.pathfinder.PathEntity;
 import org.bukkit.Location;
-import org.bukkit.craftbukkit.v1_17_R1.entity.CraftEntity;
-import org.bukkit.craftbukkit.v1_17_R1.entity.CraftPlayer;
+import org.bukkit.craftbukkit.v1_19_R3.entity.CraftEntity;
+import org.bukkit.craftbukkit.v1_19_R3.entity.CraftPlayer;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 
-public class Version1_17 implements IVersion {
+public class Version1_19_4 implements IVersion {
 
     private final EnumParticle enumParticle = new EnumParticle();
 
@@ -29,7 +30,7 @@ public class Version1_17 implements IVersion {
         }
 
         EntityPlayer entityPlayer = ((CraftPlayer) player).getHandle();
-        entityPlayer.b.a((Packet<?>) packet, null);
+        entityPlayer.b.a((Packet<?>) packet);
     }
 
     @Override
@@ -52,7 +53,7 @@ public class Version1_17 implements IVersion {
         try{
             net.minecraft.world.entity.Entity e = ((CraftEntity) entity).getHandle();
             EntityInsentient entityInsentient = (EntityInsentient) e;
-            NavigationAbstract navigationAbstract = (NavigationAbstract) Class.forName("net.minecraft.world.entity.EntityInsentient").getDeclaredMethod("getNavigation").invoke(entityInsentient);
+            NavigationAbstract navigationAbstract = (NavigationAbstract) Class.forName("net.minecraft.world.entity.EntityInsentient").getDeclaredMethod("G").invoke(entityInsentient);
             PathEntity pathEntity = navigationAbstract.a(destination.getX(), destination.getY(), destination.getZ(), 1);
             if(pathEntity != null){
                 navigationAbstract.a(pathEntity, speed);

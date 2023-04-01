@@ -4,11 +4,11 @@ import fr.naruse.api.particle.IParticle;
 import fr.naruse.api.particle.Particle;
 import fr.naruse.api.particle.version.IVersion;
 import fr.naruse.api.particle.version.particle.IEnumParticle;
-import net.minecraft.server.v1_13_R2.EntityPlayer;
-import net.minecraft.server.v1_13_R2.Packet;
-import net.minecraft.server.v1_13_R2.PacketPlayOutWorldParticles;
+import net.minecraft.server.v1_13_R2.*;
 import org.bukkit.Location;
+import org.bukkit.craftbukkit.v1_13_R2.entity.CraftEntity;
 import org.bukkit.craftbukkit.v1_13_R2.entity.CraftPlayer;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 
 public class Version1_13 implements IVersion {
@@ -41,5 +41,15 @@ public class Version1_13 implements IVersion {
         return new Particle(packet, location);
     }
 
+    @Override
+    public void moveEntityToDestination(Entity entity, Location destination, double speed) {
+        net.minecraft.server.v1_13_R2.Entity e = ((CraftEntity) entity).getHandle();
+        EntityInsentient entityInsentient = (EntityInsentient) e;
+        NavigationAbstract navigationAbstract = entityInsentient.getNavigation();
+        PathEntity pathEntity = navigationAbstract.a(destination.getX(), destination.getY(), destination.getZ());
+        if(pathEntity != null){
+            navigationAbstract.a(pathEntity, speed);
+        }
+    }
 
 }

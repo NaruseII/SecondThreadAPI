@@ -5,6 +5,7 @@ import fr.naruse.api.particle.IParticle;
 import fr.naruse.api.particle.Particle;
 import fr.naruse.api.particle.version.particle.IEnumParticle;
 import org.bukkit.Location;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 
 public interface IVersion {
@@ -17,6 +18,12 @@ public interface IVersion {
 
     default Particle buildParticle(Location location, IParticle particle, float offsetX, float offsetY, float offsetZ, int amount){
         return buildParticle(location, particle, offsetX, offsetY, offsetZ, amount, 0f);
+    }
+
+    void moveEntityToDestination(Entity entity, Location destination, double speed);
+
+    default void moveEntityToDestination(Entity entity, Location destination){
+        moveEntityToDestination(entity, destination, 1d);
     }
 
 }
