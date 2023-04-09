@@ -3,9 +3,6 @@ package fr.naruse.api.v1_19_4;
 import fr.naruse.api.particle.IParticle;
 import fr.naruse.api.particle.version.particle.IEnumParticle;
 import net.minecraft.core.particles.Particles;
-import org.bukkit.Bukkit;
-
-import java.lang.reflect.Field;
 
 public class EnumParticle implements IEnumParticle {
 
@@ -87,6 +84,11 @@ public class EnumParticle implements IEnumParticle {
     @Override
     public IParticle SMOKE_NORMAL() {
         return () -> Particles.ab;
+    }
+
+    @Override
+    public IParticle DAMAGE_INDICATOR() {
+        return () -> Particles.h;
     }
 
 }

@@ -8,6 +8,7 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 
 public class Particle {
@@ -41,6 +42,10 @@ public class Particle {
     }
 
     public void toSome(Set<Player> playerSet) {
+        playerSet.forEach(player -> this.sendPacket(player));
+    }
+
+    public void toSome(List<Player> playerSet) {
         playerSet.forEach(player -> this.sendPacket(player));
     }
 

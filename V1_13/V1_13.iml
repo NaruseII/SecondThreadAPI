@@ -9,6 +9,5 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="SecondThreadParticleAPI" />
     <orderEntry type="library" name="spigot-1.13.2" level="project" />
-
   </component>
 </module>

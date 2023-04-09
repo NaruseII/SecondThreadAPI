@@ -79,4 +79,9 @@ public class EnumParticle implements IEnumParticle {
         return () -> Particles.U;
     }
 
+    @Override
+    public IParticle DAMAGE_INDICATOR() {
+        return () -> Particles.h;
+    }
+
 }

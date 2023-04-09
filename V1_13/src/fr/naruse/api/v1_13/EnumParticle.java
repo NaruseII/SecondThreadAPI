@@ -78,4 +78,8 @@ public class EnumParticle implements IEnumParticle {
         return () -> net.minecraft.server.v1_13_R2.Particles.M;
     }
 
+    @Override
+    public IParticle DAMAGE_INDICATOR() {
+        return () -> net.minecraft.server.v1_13_R2.Particles.i;
+    }
 }

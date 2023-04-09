@@ -78,4 +78,9 @@ public class EnumParticle implements IEnumParticle {
         return () -> net.minecraft.server.v1_12_R1.EnumParticle.SMOKE_NORMAL;
     }
 
+    @Override
+    public IParticle DAMAGE_INDICATOR() {
+        return () -> net.minecraft.server.v1_12_R1.EnumParticle.DAMAGE_INDICATOR;
+    }
+
 }

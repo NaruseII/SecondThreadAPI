@@ -34,4 +34,6 @@ public interface IEnumParticle {
 
     IParticle SMOKE_NORMAL();
 
+    IParticle DAMAGE_INDICATOR();
+
 }
