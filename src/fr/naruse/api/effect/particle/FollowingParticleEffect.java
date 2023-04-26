@@ -8,7 +8,7 @@ import fr.naruse.api.particle.sender.ParticleSender;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 
-public class FollowingParticleEffect {
+public class FollowingParticleEffect implements IParticleEffect{
 
     private Entity target = null;
     private Location locationTarget = null;

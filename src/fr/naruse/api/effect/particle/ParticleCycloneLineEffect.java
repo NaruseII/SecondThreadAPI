@@ -4,7 +4,7 @@ import fr.naruse.api.particle.IParticle;
 import fr.naruse.api.particle.Particle;
 import org.bukkit.Location;
 
-public class ParticleCycloneLineEffect extends ParticleEffect {
+public class ParticleCycloneLineEffect extends ParticleEffect implements IParticleEffect {
 
     private final Location center;
     private final double particleDistance;

@@ -7,7 +7,7 @@ import fr.naruse.api.particle.Particle;
 import org.bukkit.Location;
 import org.bukkit.Material;
 
-public class ParticleGrowingCircleEffect {
+public class ParticleGrowingCircleEffect implements IParticleEffect{
 
     private final Location center;
     private final double radiusAdd;

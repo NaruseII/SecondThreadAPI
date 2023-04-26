@@ -570,6 +570,24 @@ public class MathUtils {
         return list;
     }
 
+    public static List<Block> getSquare(Location a, Location b){
+        List<Block> list = new ArrayList<>();
+
+        Location[] locations = getTopThenBottomLocation(a, b);
+        Location top = locations[0];
+        Location bottom = locations[1];
+
+        for (int x = bottom.getBlockX(); x <= top.getBlockX(); x++) {
+            for (int z = bottom.getBlockZ(); z <= top.getBlockZ(); z++) {
+                for (int y = bottom.getBlockY(); y <= top.getBlockY(); y++) {
+                    list.add(a.getWorld().getBlockAt(x, y, z));
+                }
+            }
+        }
+
+        return list;
+    }
+
     public enum Axis {
 
         X, Y, Z;

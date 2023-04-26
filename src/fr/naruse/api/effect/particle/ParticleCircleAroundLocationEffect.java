@@ -10,7 +10,7 @@ import org.bukkit.Location;
 import java.util.List;
 import java.util.Set;
 
-public class ParticleCircleAroundLocationEffect{
+public class ParticleCircleAroundLocationEffect implements IParticleEffect{
 
     private final int circleAmount;
     private final int circleRadius;

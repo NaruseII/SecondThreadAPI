@@ -10,7 +10,7 @@ import org.bukkit.Location;
 import java.util.List;
 import java.util.Set;
 
-public class ParticleImplodingSphereEffect extends ParticleEffect {
+public class ParticleImplodingSphereEffect extends ParticleEffect implements IParticleEffect{
 
     private final Location centerLocation;
     private final int startRadius;

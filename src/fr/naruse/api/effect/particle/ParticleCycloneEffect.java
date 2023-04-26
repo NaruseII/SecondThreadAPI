@@ -8,7 +8,7 @@ import org.bukkit.Location;
 import java.util.List;
 import java.util.Set;
 
-public class ParticleCycloneEffect extends ParticleEffect {
+public class ParticleCycloneEffect extends ParticleEffect implements IParticleEffect{
 
     private final Location center;
     private final double radius;

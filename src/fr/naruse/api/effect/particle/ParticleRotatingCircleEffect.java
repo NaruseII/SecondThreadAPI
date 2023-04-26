@@ -10,7 +10,7 @@ import org.bukkit.Location;
 
 import java.util.List;
 
-public class ParticleRotatingCircleEffect extends ParticleEffect {
+public class ParticleRotatingCircleEffect extends ParticleEffect implements IParticleEffect{
 
     private final Location center;
     private final int particleAmount;

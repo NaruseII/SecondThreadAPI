@@ -34,6 +34,18 @@ public class AsyncMap<T, E> {
         CollectionManager.SECOND_THREAD_RUNNABLE_SET.add(runnable);
     }
 
+    public void clear(){
+        ThreadGlobal.runSync(() -> this.syncMap.clear());
+        Runnable runnable = () -> {
+            if(this.locked){
+                this.clear();
+                return;
+            }
+            this.map.clear();
+        };
+        CollectionManager.SECOND_THREAD_RUNNABLE_SET.add(runnable);
+    }
+
     public void lock() {
         this.locked = true;
     }

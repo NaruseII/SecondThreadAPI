@@ -10,6 +10,18 @@ import java.util.List;
 
 public class ItemUtils {
 
+    public static ItemStack buildItem(ItemStack itemStack, boolean enchant) {
+        return buildItem(itemStack.getType(), itemStack.getAmount(), itemStack.getItemMeta().getDisplayName(), enchant, null);
+    }
+
+    public static ItemStack buildItem(ItemStack itemStack, String name, boolean enchant) {
+        return buildItem(itemStack.getType(), itemStack.getAmount(), name, enchant, null);
+    }
+
+    public static ItemStack buildItem(ItemStack itemStack, int amount, String name, boolean enchant) {
+        return buildItem(itemStack.getType(), amount, name, enchant, null);
+    }
+
     public static ItemStack buildItem(Material material, boolean enchant) {
         return buildItem(material, 1, "", enchant, null);
     }

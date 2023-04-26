@@ -11,7 +11,7 @@ import org.bukkit.entity.Entity;
 import java.util.List;
 import java.util.Set;
 
-public class ParticleCircleAroundEntityEffect {
+public class ParticleCircleAroundEntityEffect implements IParticleEffect {
 
     private final Entity entity;
     private final ParticleSender particleSender;

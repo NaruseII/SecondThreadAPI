@@ -5,7 +5,7 @@ import org.bukkit.Location;
 
 import java.util.List;
 
-public class FollowingParticlePathEffect {
+public class FollowingParticlePathEffect implements IParticleEffect{
 
     private List<Location> locations;
     private final FollowingParticleEffect[] particles;

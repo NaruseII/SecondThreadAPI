@@ -8,7 +8,7 @@ import org.bukkit.Location;
 
 import java.util.List;
 
-public abstract class ParticleRotatingCirclesEffect extends ParticleEffect {
+public abstract class ParticleRotatingCirclesEffect extends ParticleEffect implements IParticleEffect{
 
     private List<ParticleRotatingCircleEffect> effectList = Lists.newArrayList();
 

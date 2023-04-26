@@ -11,7 +11,7 @@ import org.bukkit.Location;
 
 import java.util.List;
 
-public class ParticleShapeEffect extends ParticleEffect {
+public class ParticleShapeEffect extends ParticleEffect implements IParticleEffect{
 
     private final Location center;
     private final int particleAmountPerLine;
