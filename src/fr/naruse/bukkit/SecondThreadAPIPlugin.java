@@ -25,7 +25,6 @@ public class SecondThreadAPIPlugin extends JavaPlugin {
         APIInit.shutdown();
     }
 
-
     private void checkPlugins(){
         CollectionManager.SECOND_THREAD_RUNNABLE_SET.add(() -> {
             PluginUpdater.checkSpleef(this);

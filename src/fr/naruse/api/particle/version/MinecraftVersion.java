@@ -10,6 +10,7 @@ import fr.naruse.api.v1_18.Version1_18;
 import fr.naruse.api.v1_19.Version1_19;
 import fr.naruse.api.v1_19_3.Version1_19_3;
 import fr.naruse.api.v1_19_4.Version1_19_4;
+import fr.naruse.api.v1_20.Version1_20;
 
 public enum MinecraftVersion {
 
@@ -23,6 +24,7 @@ public enum MinecraftVersion {
     V1_19("1.19", Version1_19.class),
     V1_19_3("1.19.3", Version1_19_3.class),
     V1_19_4("1.19.4", Version1_19_4.class),
+    V1_20_1("1.20",  Version1_20.class)
     ;
 
 
