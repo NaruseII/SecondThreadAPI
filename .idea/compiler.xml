@@ -2,10 +2,10 @@
 <project version="4">
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="SecondThreadParticleAPI" options="--add-modules java.base" />
-      <module name="V1_17" options="--add-modules java.base" />
-      <module name="V1_18" options="--add-modules java.base" />
-      <module name="V1_19" options="--add-modules java.base" />
+      <module name="SecondThreadParticleAPI" options="" />
+      <module name="V1_17" options="" />
+      <module name="V1_18" options="" />
+      <module name="V1_19" options="" />
     </option>
   </component>
 </project>
