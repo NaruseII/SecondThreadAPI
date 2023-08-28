@@ -56,7 +56,14 @@ public class EnumParticle implements IEnumParticle {
 
     @Override
     public IParticle HEART() {
-        return () -> Particles.H;
+        return () -> {
+            try {
+                return Particles.class.getField("H").get(null);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return FLAME();
+        };
     }
 
     @Override
