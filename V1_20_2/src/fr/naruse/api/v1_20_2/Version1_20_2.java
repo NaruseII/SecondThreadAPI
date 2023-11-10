@@ -1,11 +1,11 @@
-package fr.naruse.api.v1_19_4;
+package fr.naruse.api.v1_20_2;
 
 import fr.naruse.api.particle.IParticle;
 import fr.naruse.api.particle.Particle;
 import fr.naruse.api.particle.version.IVersion;
 import fr.naruse.api.particle.version.particle.IEnumParticle;
 import net.minecraft.core.particles.ParticleType;
-import net.minecraft.core.particles.Particles;
+import net.minecraft.network.PacketSendListener;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.PacketPlayOutWorldParticles;
 import net.minecraft.server.level.EntityPlayer;
@@ -14,12 +14,14 @@ import net.minecraft.world.entity.EntityInsentient;
 import net.minecraft.world.entity.ai.navigation.NavigationAbstract;
 import net.minecraft.world.level.pathfinder.PathEntity;
 import org.bukkit.Location;
-import org.bukkit.craftbukkit.v1_19_R3.entity.CraftEntity;
-import org.bukkit.craftbukkit.v1_19_R3.entity.CraftPlayer;
+import org.bukkit.craftbukkit.v1_20_R2.entity.CraftEntity;
+import org.bukkit.craftbukkit.v1_20_R2.entity.CraftPlayer;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 
-public class Version1_19_4 implements IVersion {
+import java.lang.reflect.Field;
+
+public class Version1_20_2 implements IVersion {
 
     private final EnumParticle enumParticle = new EnumParticle();
 
@@ -31,12 +33,16 @@ public class Version1_19_4 implements IVersion {
         }
 
         EntityPlayer entityPlayer = ((CraftPlayer) player).getHandle();
+        Field field = this.findField(entityPlayer.getClass(), "c");
 
         try {
-            ((PlayerConnection) EntityPlayer.class.getField("b").get(entityPlayer)).a((Packet<?>) packet);
+            if(field != null){
+                PlayerConnection playerConnection = (PlayerConnection) field.get(entityPlayer);
+                playerConnection.getClass().getMethod("b", Packet.class).invoke(playerConnection, (Packet<?>) packet);
+            }
         } catch (Exception e) {
             throw new RuntimeException(e);
-        } 
+        }
     }
 
     @Override
@@ -59,7 +65,7 @@ public class Version1_19_4 implements IVersion {
         try{
             net.minecraft.world.entity.Entity e = ((CraftEntity) entity).getHandle();
             EntityInsentient entityInsentient = (EntityInsentient) e;
-            NavigationAbstract navigationAbstract = (NavigationAbstract) Class.forName("net.minecraft.world.entity.EntityInsentient").getDeclaredMethod("G").invoke(entityInsentient);
+            NavigationAbstract navigationAbstract = (NavigationAbstract) entityInsentient.getClass().getMethod("L").invoke(entityInsentient);
             PathEntity pathEntity = navigationAbstract.a(destination.getX(), destination.getY(), destination.getZ(), 1);
             if(pathEntity != null){
                 navigationAbstract.a(pathEntity, speed);
@@ -67,6 +73,15 @@ public class Version1_19_4 implements IVersion {
         }catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+    private Field findField(Class clazz, String fieldName){
+        for (Field field : clazz.getFields()) {
+            if(fieldName.equals(field.getName())){
+                return field;
+            }
+        }
+        return null;
     }
 
 }

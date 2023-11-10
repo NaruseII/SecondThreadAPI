@@ -8,6 +8,7 @@ import net.minecraft.core.particles.ParticleType;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.PacketPlayOutWorldParticles;
 import net.minecraft.server.level.EntityPlayer;
+import net.minecraft.server.network.PlayerConnection;
 import net.minecraft.world.entity.EntityInsentient;
 import net.minecraft.world.entity.ai.navigation.NavigationAbstract;
 import net.minecraft.world.level.pathfinder.PathEntity;
@@ -29,7 +30,11 @@ public class Version1_19_3 implements IVersion {
         }
 
         EntityPlayer entityPlayer = ((CraftPlayer) player).getHandle();
-        entityPlayer.b.a((Packet<?>) packet);
+        try {
+            ((PlayerConnection) EntityPlayer.class.getField("b").get(entityPlayer)).a((Packet<?>) packet);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
