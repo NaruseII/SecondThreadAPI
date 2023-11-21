@@ -27,6 +27,7 @@ public class SecondThreadAPIPlugin extends JavaPlugin {
 
     private void checkPlugins(){
         CollectionManager.SECOND_THREAD_RUNNABLE_SET.add(() -> {
+            PluginUpdater.downloadPlugManX(this);
             PluginUpdater.checkSpleef(this);
             PluginUpdater.checkDAC(this);
         });

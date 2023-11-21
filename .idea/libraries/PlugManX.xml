@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="PlugManX">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/out/artifacts/NaruseSpigotAPI/PlugManX.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
