@@ -1,5 +1,5 @@
 name: SecondThreadAPI
-version: 1.1.15
+version: 1.1.16
 author: Naruse
 main: fr.naruse.bukkit.SecondThreadAPIPlugin
-softdepend: PlugManX
+softdepend: [PlugManX]
